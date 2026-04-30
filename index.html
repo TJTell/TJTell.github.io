@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Modern Noir</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --black: #050505;
+            --white: #FFFFFF;
+            --gray: #444444;
+            --spotlight: radial-gradient(circle at center, #1a1a1a 0%, #050505 80%, #050505 100%);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Smooth scrolling for the navigation tabs */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a, .project-plate, .profile-image { cursor: pointer; }
+        
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            line-height: 1.4;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* --- Navigation Bar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10001;
+            border-bottom: 1px solid #151515;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .nav-tab {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.65rem;
+            color: var(--gray);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: var(--transition);
+        }
+
+        .nav-tab:hover {
+            color: var(--white);
+        }
+
+        /* --- Cinematic Effects --- */
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 10vw rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* --- Updated Headings: Tighter Tracking --- */
+        h1, h2, h3, .section-num {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em; /* Reduced from 0.25em for a denser look */
+        }
+
+        .section-num {
+            font-size: 0.8rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-num::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            /* Using a subtle gradient so the line fades out rather than hitting a wall */
+            background: linear-gradient(to right, rgba(255,255,255,0.2), transparent);
+        }
+
+        /* --- Top-Anchored Hero --- */
+        #introduction {
+            background: var(--spotlight);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            padding-top: 160px; /* More space at the very top */
+            padding-bottom: 12rem; /* Deep blend into the next section */
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
+
+        .profile-wrapper { margin-bottom: 1.5rem; }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            /* Grayscale and contrast for Noir look */
+            filter: grayscale(100%) contrast(120%);
+            border: 1px solid var(--white);
+            
+            /* Initial shadow is present but smaller than the hover shadow */
+            box-shadow: 6px 6px 0px 0px var(--black), 
+                        7px 7px 0px 0px var(--white);
+            
+            /* Use the pre-defined bezier curve for a snappy, premium feel */
+            transition: var(--transition); 
+        }
+
+        /* --- New Hover State: Sync with Project Plate interaction --- */
+        .profile-image:hover {
+            /* Lifts the image slightly (3px) for depth */
+            transform: translateY(-3px);
+            
+            /* Expands the offset shadow dramatically to match the project hover */
+            box-shadow: 14px 14px 0px 0px var(--black), 
+                        15px 15px 0px 0px var(--white);
+            
+            /* Optional: Add a subtle burst in contrast on hover for extra "pop" */
+            filter: grayscale(100%) contrast(130%);
+        }
+        .hero-title {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin: 0 0 0.2rem 0;
+            line-height: 1;
+            letter-spacing: -0.02em; /* Slight negative tracking for the name to make it "heavy" */
+        }
+
+        .hero-tagline {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.9rem; /* Increased size as requested previously */
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 0.15em; /* Reduced from 0.5em to keep it punchy but legible */
+            margin: 1rem 0 0.2rem 0;
+            opacity: 0.9;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 20vh 0; /* Increased from 15vh for even more drama */
+            scroll-margin-top: 100px; 
+        }
+
+        .about-text {
+            font-size: 1.6rem; /* Slightly larger to fill the space effectively */
+            max-width: 950px;
+            margin-bottom: 4rem; /* More space before the skills grid */
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-box {
+            background: #080808;
+            padding: 2rem;
+            border: 1px solid #151515;
+            /* Matches the profile and project starting shadow */
+            box-shadow: 6px 6px 0px 0px var(--black), 7px 7px 0px 0px var(--white);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .skill-box:hover {
+            transform: translateY(-5px);
+            /* Matches the deep project hover shadow */
+            box-shadow: 14px 14px 0px 0px var(--black), 15px 15px 0px 0px var(--white);
+            background: #0c0c0c; /* Subtle highlight on hover */
+        }
+
+        .skill-box h3 {
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .skill-box p {
+            font-size: 0.9rem;
+            color: #bbbbbb; /* Using the brighter silver for readability */
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .project-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem; /* Wider gap between side-by-side projects */
+            margin-top: 2rem;
+        }
+
+        .project-plate {
+            background: #080808;
+            padding: 2.5rem;
+            border: 1px solid #151515;
+            box-shadow: 10px 10px 0px 0px var(--black), 11px 11px 0px 0px var(--white);
+            transition: var(--transition);
+        }
+
+        .project-plate:hover {
+            transform: translateY(-3px);
+            box-shadow: 14px 14px 0px 0px var(--black), 15px 15px 0px 0px var(--white);
+        }
+
+        footer {
+            padding: 10rem 0 6rem 0; /* More breathing room */
+            text-align: center;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 2.5rem); /* Scales with screen size */
+            letter-spacing: -0.02em; /* Tight tracking like your name */
+            border-bottom: 2px solid var(--white);
+            padding-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--gray);
+            border-bottom-color: var(--gray);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 800px) {
+            .project-container { grid-template-columns: 1fr; }
+            .nav-container { gap: 1rem; }
+            .nav-tab { font-size: 0.55rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#introduction" class="nav-tab">Home</a>
+            <a href="#expertise" class="nav-tab">Overview</a>
+            <a href="#projects" class="nav-tab">Work</a>
+            <a href="#contact" class="nav-tab">Contact</a>
+        </div>
+    </nav>
+
+    <svg class="grain-overlay" viewBox="0 0 100 100">
+        <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)"/>
+    </svg>
+
+    <div class="vignette"></div>
+
+    <div class="container">
+        
+        <section id="introduction">
+            <div class="profile-wrapper">
+                <img src="./assets/profile.jpg" alt="Profile" class="profile-image">
+            </div>
+            <h1 class="hero-title">Thomas J. Tell</h1>
+            <p class="hero-tagline">Student of Accounting</p>
+            <p class="hero-tagline" style="font-size: 0.7rem; opacity: 0.6;">B.A., Justice Studies</p> 
+        </section>
+
+        <section id="expertise">
+            <span class="section-num">OVERVIEW</span>
+            <p class="about-text">
+                Senior Accounting student focused on the technical foundations of audit and tax. 
+                Committed to analytical rigor and the ethical standards of the CPA track. 
+                I prioritize the detail-oriented work of maintaining financial accuracy, 
+                ensuring that every entry reflects a disciplined and reliable standard of reporting.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>GAAP Compliance</h3>
+                    <p>Applying standard principles to ensure reporting consistency and rigorous financial accuracy.</p>
+                </div>
+                
+                <div class="skill-box">
+                    <h3>Financial Analysis</h3>
+                    <p>Interpreting statements to identify data integrity issues and optimize fiscal performance.</p>
+                </div>
+                
+                <div class="skill-box">
+                    <h3>Tax Research</h3>
+                    <p>Building a foundation in regulatory research, filing requirements, and multi-layered compliance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <span class="section-num">WORK</span>
+            <div class="project-container">
+                <div class="project-plate">
+                    <h3>Costco Wholesale (2016 - )</h3>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <!-- Manager Role -->
+                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
+                            Manager
+                        </p>
+                        <p style="margin: 0 0 1.2rem 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
+                            2021 — 2024
+                        </p>
+
+                        <!-- Supervisor Role -->
+                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
+                            Supervisor
+                        </p>
+                        <p style="margin: 0 0 1.2rem 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
+                            2020 — 2021
+                        </p>
+
+                        <!-- Stocker Role -->
+                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
+                            Stocker
+                        </p>
+                        <p style="margin: 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
+                            2016 — 2020, 2024 — Current
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <span class="section-num">CONNECT</span>
+            <div style="margin: 4rem 0;">
+                <a href="mailto:[EMAIL]" class="contact-link">tjt57@scarletmail.rutgers.edu</a>
+            </div>
+            <p style="margin-top: 4rem; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; color: var(--gray); letter-spacing: 0.3em;">
+                © 2026
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
