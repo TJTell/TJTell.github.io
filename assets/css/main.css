@@ -1,0 +1,430 @@
+/* 1. GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0a0a0a;
+    --accent-red: #dc2626;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+    --nav-bg: #000000;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* 2. NAVBAR */
+.navbar {
+    background-color: var(--nav-bg);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    /* This pushes the nav-links to the far right */
+    justify-content: flex-end; 
+    align-items: center;
+}
+
+.logo {
+    font-weight: 900;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+}
+
+.logo span {
+    color: var(--accent-red);
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent-red);
+}
+
+/* 3. HERO SECTION */
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px;
+}
+
+.hero-layout {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.hero-actions {
+    margin-top: 30px;
+}
+
+.email-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid var(--accent-red);
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.email-btn:hover {
+    background-color: var(--accent-red);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+}
+
+/* The Portrait Frame */
+.hero-visual {
+    flex-shrink: 0;
+}
+
+.portrait-frame {
+    width: 320px;   /* Noticeably larger, but not overwhelming */
+    height: 440px;  /* Vertical rectangular aspect ratio */
+    border: 1px solid #333;
+    position: relative;
+    background: #111;
+}
+
+/* The red decorative accent behind the frame */
+.portrait-frame::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-red);
+    z-index: -1;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintains aspect ratio without stretching */
+    display: block;
+}
+
+/* 4. CONTENT STYLING */
+.hero-content {
+    flex: 1;
+}
+
+.name {
+    font-size: 4rem;
+    font-weight: 900;
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.tagline {
+    color: var(--accent-red);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    font-size: 1rem;
+}
+
+.accent-bar {
+    width: 40px;
+    height: 4px;
+    background: var(--accent-red);
+    margin: 30px 0;
+}
+
+.bio {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 520px;
+}
+
+/* 5. RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+    .hero-layout {
+        flex-direction: column;
+        text-align: center;
+        gap: 60px;
+    }
+
+    .hero-container {
+        padding: 60px 20px;
+    }
+
+    .portrait-frame {
+        width: 280px;
+        height: 380px;
+    }
+
+    .portrait-frame::before {
+        top: 15px;
+        left: 15px;
+    }
+
+    .accent-bar {
+        margin: 30px auto;
+    }
+
+    .name {
+        font-size: 3rem;
+    }
+}
+
+/* 6. RESUME PAGE STYLES */
+.resume-container {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+}
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+}
+
+/* Sidebar Styles */
+.sidebar-title {
+    color: var(--accent-red);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 5px;
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-list li {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.resume-sidebar a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.resume-sidebar a:hover {
+    color: var(--accent-red);
+}
+
+/* Main Content Styles */
+.section-heading {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--accent-red);
+    padding-left: 20px;
+}
+
+.entry {
+    margin-bottom: 40px;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.institution {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.date {
+    color: var(--accent-red);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.degree, .role {
+    color: var(--text-main);
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.details {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.bullet-points {
+    padding-left: 18px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.bullet-points li {
+    margin-bottom: 8px;
+}
+
+/* Mobile View */
+@media (max-width: 850px) {
+    .resume-grid {
+        grid-template-columns: 1fr;
+    }
+    .resume-container {
+        padding: 40px 20px;
+    }
+}
+
+/* 7. LIBRARY PAGE STYLES */
+.library-container {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+}
+
+.library-header {
+    margin-bottom: 60px;
+    max-width: 700px;
+}
+
+.blurb {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Stacked for clear reading */
+    gap: 40px;
+}
+
+.book-card {
+    display: flex;
+    gap: 40px;
+    background: #0a0a0a;
+    padding: 30px;
+    border: 1px solid #1a1a1a;
+    align-items: center;
+}
+
+.book-image img {
+    width: 180px; /* Standard book cover ratio */
+    height: auto;
+    box-shadow: 10px 10px 0px var(--accent-red);
+}
+
+.book-info {
+    flex: 1;
+}
+
+.genre-tag {
+    display: inline-block;
+    color: var(--accent-red);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.book-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+.book-description {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.goodreads-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #333;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.goodreads-btn:hover {
+    border-color: var(--accent-red);
+    color: var(--accent-red);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .book-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .book-image img {
+        width: 150px;
+        margin-bottom: 20px;
+        box-shadow: 5px 5px 0px var(--accent-red);
+    }
+}
+
+.book-author {
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: -10px; /* Pulls it closer to the title */
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.book-series {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+/* Adjust author margin if series is present */
+.book-series + .book-author {
+    margin-top: 0px; 
+}
