@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Major Matcher | Portfolio</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="resume.html">Resume</a>
+                <a href="library.html">Library</a>
+                <a href="app.html" class="active">Try My App</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="library-container">
+        <header class="library-header">
+            <h1 class="name">Major Matcher</h1>
+            <div class="accent-bar"></div>
+            <p class="blurb">Answer a few questions about your professional style to discover which business major fits you best.</p>
+        </header>
+
+        <section id="quiz-container" class="book-card">
+            <div class="book-info" id="quiz-content">
+                <!-- JavaScript will inject questions here -->
+                <h2 class="book-title">Ready to find your path?</h2>
+                <div class="hero-actions">
+                    <button onclick="startQuiz()" class="email-btn" style="background:none; cursor:pointer;">Start the Test</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

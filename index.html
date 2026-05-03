@@ -3,315 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Modern Noir</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --black: #050505;
-            --white: #FFFFFF;
-            --gray: #444444;
-            --spotlight: radial-gradient(circle at center, #1a1a1a 0%, #050505 80%, #050505 100%);
-            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        html { scroll-behavior: smooth; }
-        a, .project-plate, .profile-image { cursor: pointer; }
-        
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            font-family: 'Playfair Display', serif;
-            line-height: 1.4;
-            overflow-x: hidden;
-            margin: 0;
-        }
-
-        /* --- Navigation Bar --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 10001;
-            border-bottom: 1px solid #151515;
-            padding: 0.8rem 0; /* Slightly tighter */
-        }
-
-        .nav-container {
-            max-width: 1100px; /* Narrower for better focus */
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-        }
-
-        .nav-tab {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.6rem;
-            color: var(--gray);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            transition: var(--transition);
-        }
-
-        .nav-tab:hover { color: var(--white); }
-
-        .vignette {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            box-shadow: inset 0 0 10vw rgba(0,0,0,1);
-            pointer-events: none;
-            z-index: 9998;
-        }
-
-        h1, h2, h3, .section-num {
-            font-family: 'Syncopate', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .section-num {
-            font-size: 0.7rem;
-            color: var(--white);
-            margin-bottom: 1.5rem; /* Reduced from 2rem */
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 700;
-        }
-
-        .section-num::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: linear-gradient(to right, rgba(255,255,255,0.2), transparent);
-        }
-
-        /* --- Tighter Hero --- */
-        #introduction {
-            background: var(--spotlight);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: 120px; /* Reduced from 160px */
-            padding-bottom: 6rem; /* Reduced from 12rem */
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-        }
-
-        .profile-wrapper { margin-bottom: 1rem; }
-
-        .profile-image {
-            width: 140px; /* Slightly smaller for better proportions */
-            height: 140px;
-            object-fit: cover;
-            filter: grayscale(100%) contrast(120%);
-            border: 1px solid var(--white);
-            box-shadow: 6px 6px 0px 0px var(--black), 7px 7px 0px 0px var(--white);
-            transition: var(--transition); 
-        }
-
-        .profile-image:hover {
-            transform: translateY(-3px);
-            box-shadow: 10px 10px 0px 0px var(--black), 11px 11px 0px 0px var(--white);
-        }
-
-        .hero-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin: 0;
-            line-height: 1.1;
-        }
-
-        .hero-tagline {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.8rem;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin: 0.5rem 0 0 0;
-            opacity: 0.9;
-        }
-
-        /* --- Layout --- */
-        .container {
-            max-width: 1000px; /* Narrowed to keep content from feeling "drifting" */
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 8vh 0; /* Dramatic reduction from 20vh */
-            scroll-margin-top: 80px; 
-        }
-
-        .about-text {
-            font-size: 1.3rem; /* Scaled down slightly to match tighter container */
-            max-width: 800px;
-            margin-bottom: 2.5rem; /* Reduced from 4rem */
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .skill-box {
-            background: #080808;
-            padding: 1.5rem;
-            border: 1px solid #151515;
-            box-shadow: 4px 4px 0px 0px var(--black), 5px 5px 0px 0px var(--white);
-            transition: var(--transition);
-        }
-
-        .skill-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 8px 8px 0px 0px var(--black), 9px 9px 0px 0px var(--white);
-        }
-
-        .skill-box h3 { font-size: 0.75rem; margin-bottom: 0.8rem; }
-        .skill-box p { font-size: 0.85rem; color: #bbbbbb; line-height: 1.5; }
-        
-        .project-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .project-plate {
-            background: #080808;
-            padding: 1.8rem;
-            border: 1px solid #151515;
-            box-shadow: 6px 6px 0px 0px var(--black), 7px 7px 0px 0px var(--white);
-            transition: var(--transition);
-        }
-
-        footer {
-            padding: 6rem 0 4rem 0; /* Reduced from 10rem */
-            text-align: center;
-        }
-
-        .contact-link {
-            display: inline-block;
-            color: var(--white);
-            text-decoration: none;
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(1rem, 3vw, 1.8rem);
-            border-bottom: 2px solid var(--white);
-            padding-bottom: 0.3rem;
-            transition: var(--transition);
-        }
-
-        @media (max-width: 800px) {
-            .project-container { grid-template-columns: 1fr; }
-            .nav-container { gap: 1rem; }
-            section { padding: 6vh 0; }
-        }
-    </style>
+    <title>Professional Portfolio | Home</title>
+    <!-- Standardized file structure -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Clean, professional typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <a href="#introduction" class="nav-tab">Home</a>
-            <a href="#expertise" class="nav-tab">Overview</a>
-            <a href="#projects" class="nav-tab">Work</a>
-            <a href="#contact" class="nav-tab">Contact</a>
+    <header class="navbar">
+        <nav class="nav-container">
+            <!-- Logo removed -->
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="resume.html">Resume</a>
+                <a href="library.html">Library</a>
+                <a href="app.html">Try My App</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="hero-container">
+        <div class="hero-layout">
+            <!-- Visual Section: Large but contained portrait -->
+            <section class="hero-visual">
+                <div class="portrait-frame">
+                    <img src="assets/images/profile.jpg" alt="Profile" class="profile-pic">
+                </div>
+            </section>
+            
+            <!-- Content Section: Professional Bio and Tagline -->
+            <section class="hero-content">
+                <h1 class="name">Thomas J. Tell</h1>
+                <p class="tagline">Student of Accounting</p>
+                <p class="tagline">BA., Justice Studies</p>
+                <div class="accent-bar"></div>
+                <p class="bio">
+                    I am an accounting student at Rutgers Business School in New Brunswick, NJ, 
+                    and a Montclair State University alumnus with a BA in Justice Studies. 
+                    Born and raised in New Jersey, I am interested in pursuing a career in auditing, 
+                    taxation, or corporate accounting. I invite you to view my resume, 
+                    check out my latest project, or perhaps learn more about me.
+                </p>
+
+                <!-- Email Link -->
+                <div class="hero-actions">
+                    <a href="mailto:tjt57@scarletmail.rutgers.edu" class="email-btn">Get In Touch</a>
+                </div>
+            </section>
         </div>
-    </nav>
+    </main>
 
-    <div class="vignette"></div>
-
-    <div class="container">
-        
-        <section id="introduction">
-            <div class="profile-wrapper">
-                <img src="./assets/profile.jpg" alt="Profile" class="profile-image">
-            </div>
-            <h1 class="hero-title">Thomas J. Tell</h1>
-            <p class="hero-tagline">Student of Accounting</p>
-            <p class="hero-tagline" style="font-size: 0.7rem; opacity: 0.6;">B.A., Justice Studies</p> 
-        </section>
-
-        <section id="expertise">
-            <span class="section-num">OVERVIEW</span>
-            <p class="about-text">
-                Senior Accounting student focused on the technical foundations of audit and tax. 
-                Committed to analytical rigor and the ethical standards of the CPA track. 
-                I prioritize the detail-oriented work of maintaining financial accuracy, 
-                ensuring that every entry reflects a disciplined and reliable standard of reporting.
-            </p>
-            <div class="skills-grid">
-                <div class="skill-box">
-                    <h3>GAAP Compliance</h3>
-                    <p>Applying standard principles to ensure reporting consistency and rigorous financial accuracy.</p>
-                </div>
-                
-                <div class="skill-box">
-                    <h3>Financial Analysis</h3>
-                    <p>Interpreting statements to identify data integrity issues and optimize fiscal performance.</p>
-                </div>
-                
-                <div class="skill-box">
-                    <h3>Tax Research</h3>
-                    <p>Building a foundation in regulatory research, filing requirements, and multi-layered compliance.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <span class="section-num">WORK</span>
-            <div class="project-container">
-                <div class="project-plate">
-                    <h3>Costco Wholesale (2016 - )</h3>
-                    
-                    <div style="margin-top: 1.5rem;">
-                        <!-- Manager Role -->
-                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
-                            Manager
-                        </p>
-                        <p style="margin: 0 0 1.2rem 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
-                            2021 — 2024
-                        </p>
-
-                        <!-- Supervisor Role -->
-                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
-                            Supervisor
-                        </p>
-                        <p style="margin: 0 0 1.2rem 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
-                            2020 — 2021
-                        </p>
-
-                        <!-- Stocker Role -->
-                        <p style="margin: 0; color: var(--white); font-family: 'Syncopate'; font-size: 0.75rem; letter-spacing: 0.1em;">
-                            Stocker
-                        </p>
-                        <p style="margin: 0; color: #bbbbbb; font-size: 0.9rem; font-weight: 400;">
-                            2016 — 2020, 2024 — Current
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer id="contact">
-            <span class="section-num">CONNECT</span>
-            <div style="margin: 4rem 0;">
-                <a href="mailto:[EMAIL]" class="contact-link">tjt57@scarletmail.rutgers.edu</a>
-            </div>
-            <p style="margin-top: 4rem; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; color: var(--gray); letter-spacing: 0.3em;">
-                © 2026
-            </p>
-        </footer>
-    </div>
 </body>
 </html>
